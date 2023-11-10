@@ -12,3 +12,11 @@
 .account-forms-container {
   padding-left: 20px;
 }
+
+.submit-container {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+#submit-story-btn {
+  width: 6rem
+}

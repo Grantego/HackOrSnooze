@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 
 <!-- Hack or Snooze
 
@@ -37,12 +37,39 @@
   <div class="navbar-brand">
     <a class="nav-link" href="#" id="nav-all">Hack or Snooze</a>
   </div>
+  <div class="navbar-main hidden">
+    |
+    <a class="nav-link" href="#" id="nav-submit">submit</a>
+    |
+    <a class="nav-link" href="#" id="nav-favorites">favorites</a>
+    |
+    <a class="nav-link" href="#" id="nav-my-stories">my stories</a>
+  </div>
   <div class="nav-right">
     <a class="nav-link" href="#" id="nav-login">login/signup</a>
     <a class="nav-link" href="#" id="nav-user-profile"></a>
     <a class="hidden" id="nav-logout" href="#"><small>(logout)</small></a>
   </div>
 </nav>
+
+<section class="submit-container container">
+    <!-- add story form -->
+    <form action="#" id="story-form" class="account-form hidden" method="post">
+      <div class="story-input">
+        <label for="author-input">Author</label>
+        <input id="author-input" type="text">
+      </div>
+      <div class="story-input">
+        <label for="title-input">Title</label>
+        <input id="title-input" type="text">
+      </div>
+      <div class="story-input">
+        <label for="url-input">URL</label> 
+        <input id="url-input" type="url">
+      </div>
+      <button type="submit" id="submit-story-btn">submit story</button>
+    </form>
+</section>
 
 <!-- area for stories (all stories, user stories, favorites) -->
 <section class="stories-container container">
@@ -94,6 +121,7 @@
     </div>
     <button type="submit">create account</button>
   </form>
+
 </section>
 
 <!-- Library JS & our JS -->

@@ -25,7 +25,7 @@ class Story {
 
   getHostName() {
     // UNIMPLEMENTED: complete this function!
-    return "hostname.com";
+    return new URL(this.url).hostname;
   }
 }
 
@@ -73,8 +73,14 @@ class StoryList {
    * Returns the new Story instance
    */
 
-  async addStory( /* user, newStory */) {
-    // UNIMPLEMENTED: complete this function!
+  async addStory( user, story) {
+    
+    const response = await axios.post('https://hack-or-snooze-v3.herokuapp.com/stories', {token: user.loginToken, story: story})
+    const newStory = new Story(response.data.story)
+
+    this.stories.unshift(newStory);
+    user.ownStories.unshift(newStory);
+    return newStory
   }
 }
 
@@ -192,5 +198,35 @@ class User {
       console.error("loginViaStoredCredentials failed", err);
       return null;
     }
+  }
+
+  async addNewFavorite(story) {
+    console.log('addNewFavorite running')
+    this.favorites.push(story);
+    await axios.post(`https://hack-or-snooze-v3.herokuapp.com/users/${this.username}/favorites/${story.storyId}`,
+    {
+      token: this.loginToken
+    })
+  }
+  async deleteFavorite(story) {
+    console.log(story.storyId)
+    console.log('deleteFavorite running')
+    const updatedFavList = this.favorites.filter(favorite => {
+      return favorite.storyId !== story.storyId;
+    })
+    this.favorites = updatedFavList;
+    await axios.delete(`https://hack-or-snooze-v3.herokuapp.com/users/${this.username}/favorites/${story.storyId}`,
+    {data: {token: this.loginToken}})
+  }
+
+  isAFavorite (story){
+    return this.favorites.some(s => (s.storyId === story.storyId))
+  }
+
+  deleteOwnStory(story) {
+    const updatedOwnList = this.ownStories.filter(s => {
+      return s.storyId !== story.storyId;
+    })
+    this.ownStories = updatedOwnList;
   }
 }

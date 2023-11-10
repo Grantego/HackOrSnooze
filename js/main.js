@@ -3,16 +3,23 @@
 // So we don't have to keep re-finding things on page, find DOM elements once:
 
 const $body = $("body");
+const $stars = $('i')
 
 const $storiesLoadingMsg = $("#stories-loading-msg");
 const $allStoriesList = $("#all-stories-list");
 
 const $loginForm = $("#login-form");
 const $signupForm = $("#signup-form");
+const $storyForm = $("#story-form");
 
 const $navLogin = $("#nav-login");
 const $navUserProfile = $("#nav-user-profile");
 const $navLogOut = $("#nav-logout");
+const $navSubmit = $('#nav-submit');
+const $navFavorites = $('#nav-favorites');
+const $navMyStories = $('#nav-my-stories');
+
+const $navbarMain = $('.navbar-main');
 
 /** To make it easier for individual components to show just themselves, this
  * is a useful function that hides pretty much everything on the page. After
@@ -24,6 +31,7 @@ function hidePageComponents() {
     $allStoriesList,
     $loginForm,
     $signupForm,
+    $storyForm
   ];
   components.forEach(c => c.hide());
 }

@@ -22,9 +22,11 @@ async function login(evt) {
   currentUser = await User.login(username, password);
 
   $loginForm.trigger("reset");
-
+  $loginForm.hide();
+  $signupForm.hide();
   saveUserCredentialsInLocalStorage();
   updateUIOnUserLogin();
+  location.reload()
 }
 
 $loginForm.on("submit", login);
@@ -80,6 +82,9 @@ async function checkForRememberedUser() {
 
   // try to log in with these credentials (will be null if login failed)
   currentUser = await User.loginViaStoredCredentials(token, username);
+  if (currentUser) {
+    $navbarMain.show()
+  }
 }
 
 /** Sync current user information to localStorage.
@@ -111,6 +116,8 @@ function updateUIOnUserLogin() {
   console.debug("updateUIOnUserLogin");
 
   $allStoriesList.show();
+  $navbarMain.show();
 
   updateNavOnLogin();
 }
+ 
